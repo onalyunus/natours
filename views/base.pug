@@ -7,9 +7,13 @@ html
       link(rel='stylesheet' href='/css/style.css')
       link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
       link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
-      title Natours | #{title}
+      title Yunus Emre | #{title}
 
   body(data-alert=`${alert ? alert : ''}`)
+
+    // NAVIGATION
+    include _navigation
+
     // HEADER
     include _header
 

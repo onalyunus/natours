@@ -1,10 +1,24 @@
 footer.footer
-  .footer__logo
-    img(src='/img/logo-green.png' alt='Natour logo')
-  ul.footer__nav
-    li: a(href='#') About us
-    li: a(href='#') Download apps
-    li: a(href='#') Become a guide
-    li: a(href='#') Careers
-    li: a(href='#') Contact
-  p.footer__copyright &copy; by Jonas Schmedtmann. Feel free to use this project for your own purposes, EXCEPT producing your own course or tutorials!
+  .footer__logo-box
+    img.footer__logo(src='', alt='')
+  .row
+    .col-1-of-2
+      .footer__navigation
+        ul.footer__list
+          li.footer__item
+            a.footer__link(href='#') Company
+          li.footer__item
+            a.footer__link(href='#') Contact us
+          li.footer__item
+            a.footer__link(href='#') Terms of Use
+          li.footer__item
+            a.footer__link(href='#') Privacy Policy
+          li.footer__item
+            a.footer__link(href='#') Careers
+    .col-1-of-2
+      p.footer__copyright
+        | Built my 
+        a.footer__link(href='#') Yunus Emre Onal
+        |   
+        a.footer__link(href='#') My Project
+        | . Copyright &copy; All Reserved.

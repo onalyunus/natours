@@ -20,7 +20,6 @@ const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 
-// Start express app
 const app = express();
 
 app.enable('trust proxy');
@@ -29,13 +28,14 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
-// Implement CORS
-app.use(cors());
+// Enable all CORS (Cross Origin Resource Sharing) Requests
 // Access-Control-Allow-Origin *
-// api.natours.com, front-end natours.com
+app.use(cors());
+
+// api.natours.com FRONT_END natours.com
 // app.use(cors({
 //   origin: 'https://www.natours.com'
-// }))
+// }));
 
 app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
@@ -43,8 +43,29 @@ app.options('*', cors());
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set security HTTP headers
-app.use(helmet());
+// Set Security HTTP Headers
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
+//       baseUri: ["'self'"],
+//       fontSrc: ["'self'", 'https:', 'http:', 'data:'],
+//       scriptSrc: [
+//         "'self'",
+//         'https:',
+//         'http:',
+//         'blob:'],
+//       styleSrc: ["'self'", 'https:', 'http:', "'unsafe-inline'"]
+//     }
+//   })
+// );
+
+// Set Security HTTP Headers
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -59,7 +80,6 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
 app.post(
   '/webhook-checkout',
   bodyParser.raw({ type: 'application/json' }),
